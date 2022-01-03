@@ -1,8 +1,8 @@
 class Player:
-    def __init__(self, name, role) :
+    def __init__(self, name, role):
         self.name = name
         self.role = role
-    def __repr__(self) :
+    def __repr__(self):
         return f"{self.name} : {self.role}"
 
 GodOptions = ["checkPlayer", "removePlayer", "checkALLPlayers"]
@@ -54,11 +54,11 @@ all_roles = list(players.values())
 
 while True:
     if all_roles.count("normal person") + all_roles.count("doctor") + all_roles.count("detective") == \
-        all_roles.count("normal mafia") + all_roles.count("godFather") :
+        all_roles.count("normal mafia") + all_roles.count("godFather"):
         print(f"\n\n*** \033[31mmafia win\033[0m ***\nGGWP")
         break
     
-    if all_roles.count("normal mafia") + all_roles.count("godFather") == 0 :
+    if all_roles.count("normal mafia") + all_roles.count("godFather") == 0:
         print(f"\n\n*** \033[32mvillage win\033[0m ***\nGGWP")
         break
 
