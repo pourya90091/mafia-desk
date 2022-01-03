@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self,name,role) :
+    def __init__(self, name, role) :
         self.name = name
         self.role = role
     def __repr__(self) :
@@ -20,10 +20,10 @@ while True:
             break
     except: print("\033[31mplayer count must be integer number\033[0m\n")
 
-for n in range(1,playerCount+1):
+for n in range(1, playerCount+1):
     while True:
         try:
-            player = Player(input(f"\nenter name player \033[36m{n}\033[0m : "),"normal person")
+            player = Player(input(f"\nenter name player \033[36m{n}\033[0m : "), "normal person")
             if player.name == "":
                 raise ValueError("player name can not be empty")
             elif player.name in playersName:
@@ -34,7 +34,7 @@ for n in range(1,playerCount+1):
             break
 
     playersName.append(player.name)
-    players.append((player.name,player.role))
+    players.append((player.name, player.role))
 
 players = dict(players)
 
@@ -86,4 +86,4 @@ while True:
         elif Godchoice == "checkALLPlayers":
             print(f"\n\033[36m{list(players.keys())}")
     else:
-        print("\033[31moption not defined\033[0m")
+        print("\033[31mcommand not defined\033[0m")
