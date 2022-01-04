@@ -5,7 +5,7 @@ class Player:
     def __repr__(self):
         return f"{self.name} : {self.role}"
 
-GodOptions = ["checkPlayer", "removePlayer", "checkALLPlayers"]
+GodOptions = ["checkPlayer", "removePlayer", "checkAllPlayers"]
 roles = ["doctor", "godFather", "detective", "normal mafia"]
 players = []
 playersName = []
@@ -27,7 +27,7 @@ for n in range(1, playerCount+1):
             if player.name == "":
                 raise ValueError("player name can not be empty")
             elif player.name in playersName:
-                raise ValueError('player name must be unique')
+                raise ValueError("player name must be unique")
         except ValueError as error:
             print(f"\033[31m{error}\033[0m")
         else:
@@ -65,14 +65,14 @@ while True:
 
     print(f"\n\033[32mcommands --->\033[0m \033[35m{GodOptions}\033[0m")
     Godchoice = input("command : ")
-    if Godchoice == "exit()":
+    if Godchoice == "exit":
         break
 
     if Godchoice in GodOptions:
         if Godchoice == "checkPlayer":
             check = input("\n\033[33menter player name\033[0m : ")
             if check in players.keys():
-                print(f'{check} role : \033[36m{players[check]}\033[0m')
+                print(f"\033[36m{check}\033[0m role : \033[36m{players[check]}\033[0m")
             else:
                 print("\033[31mthis player not defined\033[0m (or already removed)")
         elif Godchoice == "removePlayer":
@@ -83,7 +83,10 @@ while True:
                 print(f"{check} is \033[31mremoved\033[0m")
             else:
                 print("\033[31mthis player not defined\033[0m (or already removed)")
-        elif Godchoice == "checkALLPlayers":
-            print(f"\n\033[36m{list(players.keys())}")
+        elif Godchoice == "checkAllPlayers":
+            for player in players.items():
+                print(f"\n\033[36m{player[0]}\033[0m role : \033[36m{player[1]}\033[0m")
+            print(f"\nalive players : \033[33m{len(players)}\033[0m")
+            
     else:
         print("\033[31mcommand not defined\033[0m")
