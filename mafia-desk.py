@@ -5,12 +5,15 @@ class Player:
     def __repr__(self):
         return f"{self.name} : {self.role}"
 
-GodOptions = ["checkPlayer", "removePlayer", "checkAllPlayers"]
+GodOptions = ["checkPlayer", "removePlayer", "inquiryPlayer", "checkAllPlayers"]
+GodOptionsR = ["CP", "RP", "IP", "CAP"]
 roles = ["doctor", "godFather", "detective", "normal mafia"]
 players = []
 playersName = []
 
 print("\033[92mMAFIA desk\033[0m\n")
+
+# ---------------------- <take player count> ----------------------
 while True:
     try:
         playerCount = int(input("enter plyaer count : "))
@@ -19,7 +22,9 @@ while True:
         else:
             break
     except: print("\033[31mplayer count must be integer number\033[0m\n")
+# ---------------------- </take player count> ----------------------
 
+# ---------------------- <generate players> ----------------------
 for n in range(1, playerCount+1):
     while True:
         try:
@@ -35,14 +40,15 @@ for n in range(1, playerCount+1):
 
     playersName.append(player.name)
     players.append((player.name, player.role))
+# ---------------------- </generate players> ----------------------
 
 players = dict(players)
 
-# ---------------- for randomize ----------------
+# ---------------- <randomize> ----------------
 playersName = set(playersName)
 
 roles = set(roles)
-# ---------------- for randomize ----------------
+# ---------------- </randomize> ----------------
 
 iter_playersName = iter(playersName)
 
@@ -55,11 +61,11 @@ all_roles = list(players.values())
 while True:
     if all_roles.count("normal person") + all_roles.count("doctor") + all_roles.count("detective") == \
         all_roles.count("normal mafia") + all_roles.count("godFather"):
-        print(f"\n\n*** \033[31mmafia win\033[0m ***\nGGWP")
+        print(f"\n\n*** \033[31mmafia win\033[0m ***\nGGWP\n")
         break
-    
+
     if all_roles.count("normal mafia") + all_roles.count("godFather") == 0:
-        print(f"\n\n*** \033[32mvillage win\033[0m ***\nGGWP")
+        print(f"\n\n*** \033[32mvillage win\033[0m ***\nGGWP\n")
         break
 
 
@@ -67,26 +73,35 @@ while True:
     Godchoice = input("command : ")
     if Godchoice == "exit":
         break
-
-    if Godchoice in GodOptions:
-        if Godchoice == "checkPlayer":
+# ------------------------------------- <god desk> -------------------------------------
+    if Godchoice in GodOptions or Godchoice in GodOptionsR:
+        if Godchoice == "checkPlayer" or Godchoice == "CP":
             check = input("\n\033[33menter player name\033[0m : ")
             if check in players.keys():
                 print(f"\033[36m{check}\033[0m role : \033[36m{players[check]}\033[0m")
             else:
                 print("\033[31mthis player not defined\033[0m (or already removed)")
-        elif Godchoice == "removePlayer":
+        elif Godchoice == "removePlayer" or Godchoice == "RP":
             check = input("\n\033[33menter player name\033[0m : ")
             if check in players.keys():
+                print(f"\033[036m{check}\033[0m (\033[036m{players[check]}\033[0m) was \033[31mremoved\033[0m")
                 n = players.pop(check)
                 all_roles.remove(n)
-                print(f"{check} is \033[31mremoved\033[0m")
             else:
                 print("\033[31mthis player not defined\033[0m (or already removed)")
-        elif Godchoice == "checkAllPlayers":
+        elif Godchoice == "inquiryPlayer" or Godchoice == "IP":
+            check = input("\n\033[33menter player name\033[0m : ")
+            if check in players.keys():
+                if players[check] == "normal mafia":
+                    print("\033[32myes\033[0m")
+                else:
+                    print("\033[31mno\033[0m")
+            else:
+                print("\033[31mthis player not defined\033[0m (or already removed)")
+        elif Godchoice == "checkAllPlayers" or Godchoice == "CAP":
             for player in players.items():
                 print(f"\n\033[36m{player[0]}\033[0m role : \033[36m{player[1]}\033[0m")
             print(f"\nalive players : \033[33m{len(players)}\033[0m")
-            
     else:
         print("\033[31mcommand not defined\033[0m")
+# ------------------------------------- </god desk> -------------------------------------
