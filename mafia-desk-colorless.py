@@ -12,8 +12,8 @@ players = []
 playersName = []
 exit = False
 
-print("----------------------\n\033[92mMAFIA desk\033[0m\n")
-print("for quit, type '\033[31mexit\033[0m'\n")
+print("----------------------\nMAFIA desk\n")
+print("for quit, type 'exit'\n")
 
 # ---------------------- <take player count> ----------------------
 while True:
@@ -28,9 +28,9 @@ while True:
             playerCount = int(playerCount)
             break
     except ValueError:
-        print("\033[31mplayer count must be integer number\033[0m\n")
+        print("player count must be integer number\n")
     except KeyError as error:
-        print("\033[31mminimum player for mafia is\033[0m \033[33m6\033[0m\n")
+        print("minimum player for mafia is 6\n")
     except KeyboardInterrupt:
         exit = True
         break
@@ -45,7 +45,7 @@ if exit == False:
 
         while True:
             try:
-                name = input(f"\nenter name player \033[36m{n}\033[0m : ")
+                name = input(f"\nenter name player {n} : ")
 
                 if name == "exit":
                     raise KeyboardInterrupt("exit")
@@ -54,7 +54,7 @@ if exit == False:
                 elif name in playersName:
                     raise ValueError("player name must be unique")
             except ValueError as error:
-                print(f"\033[31m{error}\033[0m")
+                print(f"{error}")
             except KeyboardInterrupt:
                 exit = True
                 break
@@ -88,15 +88,15 @@ if exit == False:
         while True:
             if all_roles.count("normal person") + all_roles.count("doctor") + all_roles.count("detective") == \
                 all_roles.count("normal mafia") + all_roles.count("godFather"):
-                print(f"\n\n*** \033[31mmafia win\033[0m ***\nGGWP\n")
+                print(f"\n\n*** mafia win ***\nGGWP\n")
                 break
 
             if all_roles.count("normal mafia") + all_roles.count("godFather") == 0:
-                print(f"\n\n*** \033[32mvillage win\033[0m ***\nGGWP\n")
+                print(f"\n\n*** village win ***\nGGWP\n")
                 break
 
 
-            print(f"\n\033[32mcommands --->\033[0m \033[35m{GodOptions}\033[0m\n\033[32m{GodOptionsA}\033[0m")
+            print(f"\ncommands ---> {GodOptions}\n{GodOptionsA}")
             try:
                 Godchoice = input("command : ")
                 if Godchoice == "exit":
@@ -106,32 +106,32 @@ if exit == False:
 
             if Godchoice in GodOptions or Godchoice in GodOptionsA:
                 if Godchoice == "checkPlayer" or Godchoice == "CP":
-                    name = input("\n\033[33menter player name\033[0m : ")
+                    name = input("\nenter player name : ")
                     if name in players.keys():
-                        print(f"\033[36m{name}\033[0m role : \033[36m{players[name]}\033[0m")
+                        print(f"{name} role : {players[name]}")
                     else:
-                        print("\033[31mthis player not defined\033[0m (or already removed)")
+                        print("this player not defined (or already removed)")
                 elif Godchoice == "removePlayer" or Godchoice == "RP":
-                    name = input("\n\033[33menter player name\033[0m : ")
+                    name = input("\nenter player name : ")
                     if name in players.keys():
-                        print(f"\033[36m{name}\033[0m (\033[36m{players[name]}\033[0m) was \033[31mremoved\033[0m")
+                        print(f"{name} ({players[name]}) was removed")
                         n = players.pop(name)
                         all_roles.remove(n)
                     else:
-                        print("\033[31mthis player not defined\033[0m (or already removed)")
+                        print("this player not defined (or already removed)")
                 elif Godchoice == "inquiryPlayer" or Godchoice == "IP":
-                    name = input("\n\033[33menter player name\033[0m : ")
+                    name = input("\nenter player name : ")
                     if name in players.keys():
                         if players[name] == "normal mafia":
-                            print("\033[32myes\033[0m")
+                            print("yes")
                         else:
-                            print("\033[31mno\033[0m")
+                            print("no")
                     else:
-                        print("\033[31mthis player not defined\033[0m (or already removed)")
+                        print("this player not defined (or already removed)")
                 elif Godchoice == "checkAllPlayers" or Godchoice == "CAP":
                     for player in players.items():
-                        print(f"\n\033[36m{player[0]}\033[0m role : \033[36m{player[1]}\033[0m")
-                    print(f"\nalive players : \033[33m{len(players)}\033[0m")
+                        print(f"\n{player[0]} role : {player[1]}")
+                    print(f"\nalive players : {len(players)}")
             else:
-                print("\033[31mcommand not defined\033[0m")
+                print("command not defined")
         # ------------------------------------- </main> -------------------------------------
